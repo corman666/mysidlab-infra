@@ -1,1 +1,21 @@
-
+name: stuff
+hosts: all
+gather_facts: false
+become: true
+vars:
+  hostname: corman-client
+  tz: Antartica/McMurdo
+  
+tasks:
+  - name: Set timezone to "{{ tz }}
+    timezone:
+      name: "{{ tz }}"
+  - name  Display new timezone
+    shell: date +%Z
+    
+  - name: Set hostname
+    hostname:
+      name: "{{ hostname }}"
+      
+  - name: Dump
+    setup:
